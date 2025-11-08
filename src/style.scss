@@ -1,145 +1,247 @@
+@use "variables" as *;
+@use "mixins" as *;
+
 * {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: $font-main;
+  box-sizing: border-box;
 }
 
 body {
-  background-color: #FCFAF6;
+  background-color: $color-bg;
 }
 
 .header {
   background-color: transparent;
 
-  .list {
-    display: flex;
-    justify-content: start;
-    padding: 15px;
+  .navbar {
+    .nav-list {
+      @include flex-center(row, 8rem);
+      justify-content: flex-start;
+      padding: 15px;
+      list-style: none;
 
-    .item {
-      margin-left: 8rem;
-      font-size: 20px;
-    }
+      .nav-item {
+        font-size: 20px;
 
-    .first {
-      margin-left: 0;
+        a {
+          color: inherit;
+          text-decoration: none;
+          display: inline-block;
+          padding: 4px 0;
+          @include transition(color);
+
+          &:hover {
+            opacity: 0.7;
+          }
+        }
+
+        &.first {
+          margin-left: 0;
+        }
+      }
+
+      @media (max-width: 700px) {
+        @include flex-center(column, 12px);
+        gap: 12px;
+
+        .nav-item {
+          margin-left: 0;
+          font-size: 18px;
+          width: 100%;
+          text-align: center;
+        }
+      }
     }
   }
 
   .hr {
-    opacity: 20%;
+    opacity: 0.1;
   }
 }
 
-.section-1 {
+.hero {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  padding: 0 6%;
 
-  .annonce {
-    margin-left: 3%;
-    margin-top: 20px;
-    width: 94%;
-    height: fit-content;
-    background-color: #F6F0E4;
-    display: flex;
+  .announcement {
+    margin: 20px 0 0;
+    width: 100%;
+    background-color: $color-accent;
+    @include flex-center(row, 0);
     justify-content: space-between;
-    border-radius: 10px;
+    border-radius: $radius-md;
 
-    .title-annonce {
+    .announcement-text {
       padding: 20px;
     }
 
-    .link-annonce {
+    .announcement-link {
       padding: 20px;
       text-decoration: underline;
+      @include transition(color);
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+
+    @media (max-width: 700px) {
+      @include flex-center(column, 0);
+      gap: 0;
+      text-align: center;
+
+      .announcement-text {
+        padding: 12px;
+      }
+      .announcement-link {
+        padding: 12px;
+      }
     }
   }
 
-  .comment {
+  .hero-subtitle {
     text-align: center;
     font-size: 15px;
     margin-top: 40px;
   }
 
-  .title {
+  .hero-title {
     font-weight: 400;
     font-size: 4rem;
     text-align: center;
     margin-top: 50px;
+    line-height: 1.05;
   }
 
-  .link-join {
+  .hero-link {
     text-decoration: underline;
     text-align: center;
     cursor: pointer;
     margin-top: 40px;
+    @include transition(opacity);
+
+    &:hover {
+      opacity: 0.8;
+    }
   }
 
-  .illustration {
+  .hero-image {
     margin-top: 40px;
+    max-width: 100%;
+    height: auto;
+  }
+
+  @media (max-width: 700px) {
+    .hero-title {
+      font-size: 2rem;
+      margin-top: 24px;
+      padding: 0 8px;
+    }
+
+    .hero-subtitle {
+      margin-top: 16px;
+    }
+
+    .hero-link {
+      margin-top: 20px;
+    }
+
+    .hero-image {
+      margin-top: 20px;
+      width: 90%;
+    }
   }
 }
 
-
-.what-we-do {
+.activities {
   max-width: 100%;
   display: flex;
   flex-direction: column;
-  margin: 0px 12%;
+  margin: 0 12%;
 
-  .align {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 80px;
-  }
-
-  .h2 {
+  .section-title {
     font-size: 50px;
     text-align: center;
-    margin-top: 60px;
+    margin-top: $padding-section;
   }
 
-  .details {
+  .activities-intro {
     text-align: center;
     margin-top: 120px;
   }
 
-  .detail {
+  .activities-desc {
     font-size: 30px;
     margin-top: 40px;
     text-align: center;
   }
 
-  .article {
-    display: flex;
-    flex-direction: column;
-    background-color: transparent;
-    width: 25%;
-    height: fit-content;
-    padding: 24px;
+  .activities-grid {
+    @include flex-center(row, 40px);
+    justify-content: space-around;
+    margin-top: 80px;
 
-    .title-article {
-      font-size: 15px;
-      text-align: center;
+    .activity-card {
+      display: flex;
+      flex-direction: column;
+      width: 25%;
+      padding: 24px;
+
+      .activity-label {
+        font-size: 15px;
+        text-align: center;
+      }
+
+      .activity-title {
+        font-size: 24px;
+        text-align: center;
+        margin-top: 40px;
+      }
+
+      .activity-desc {
+        text-align: center;
+        font-size: 16px;
+        margin-top: 40px;
+      }
     }
 
-    .content-article {
-      font-size: 24px;
-      text-align: center;
-      margin-top: 40px;
-    }
-
-    .description-article {
-      text-align: center;
-      font-size: 16px;
-      margin-top: 40px;
+    @media (max-width: 700px) {
+      @include flex-center(column, 20px);
+      .activity-card {
+        width: 100%;
+        padding: 18px;
+      }
     }
   }
-}
 
-.image {
-  margin-top: 80px;
+  .activities-image {
+    margin-top: 80px;
+    max-width: 100%;
+    height: auto;
+  }
+
+  @media (max-width: 700px) {
+    margin: 0 6%;
+    .section-title {
+      font-size: 32px;
+      margin-top: 40px;
+    }
+    .activities-intro {
+      margin-top: 40px;
+    }
+    .activities-desc {
+      font-size: 18px;
+      margin-top: 16px;
+    }
+    .activities-image {
+      margin-top: 40px;
+      width: 100%;
+    }
+  }
 }
 
 .news {
@@ -148,152 +250,188 @@ body {
   flex-direction: column;
   margin: 0 6%;
 
-  .h2 {
+  .section-title {
     font-size: 50px;
     text-align: center;
     margin-top: 60px;
   }
 
-  .results {
-    background-color: transparent;
-    border: 1px solid #e5e5e5;
+  .news-feature {
+    border: 1px solid $color-border;
     border-radius: 12px;
-    width: 100%;
-    max-width: 1500px;
     margin-top: 60px;
-    padding: 0;
 
-    .align {
-      display: flex;
+    .news-flex {
+      @include flex-center(row, 40px);
       flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
       padding: 40px 60px;
-      gap: 40px;
-    }
 
-    .img-results {
-      flex: 1;
-      min-width: 300px;
+      .news-image {
+        flex: 1;
+        min-width: 300px;
 
-      img {
-        width: 100%;
-        height: auto;
-        border-radius: 10px;
-        object-fit: cover;
-        display: block;
+        img {
+          width: 100%;
+          border-radius: $radius-md;
+          object-fit: cover;
+        }
+      }
+
+      .news-content {
+        flex: 1;
+        min-width: 300px;
+        text-align: center;
+        color: $color-text;
+
+        .news-title {
+          font-size: 28px;
+          font-weight: 500;
+          margin: 20px 0;
+        }
+
+        .news-desc {
+          opacity: 0.8;
+        }
       }
     }
 
-    .details {
-      flex: 1;
-      min-width: 300px;
-      text-align: center;
-      color: #333;
+    @media (max-width: 700px) {
+      .news-flex {
+        @include flex-center(column, 20px);
+        padding: 20px;
 
+        .news-image {
+          min-width: auto;
+          width: 100%;
+        }
+        .news-content {
+          min-width: auto;
+          width: 100%;
+        }
 
-      .content-article {
-        font-size: 28px;
-        font-weight: 500;
-        margin: 20px 0;
+        .news-title {
+          font-size: 20px;
+        }
       }
-
-      .description-article {
-        opacity: 0.8;
-      }
-
     }
   }
 
-  .align {
+  .news-grid {
     display: flex;
     justify-content: space-between;
 
-    .container {
-
-      background-color: transparent;
-      border: 1px solid #e5e5e5;
+    .news-card {
+      border: 1px solid $color-border;
       border-radius: 12px;
       width: 45%;
-      max-width: 1100px;
-      margin: 30px 0px;
+      margin: 30px 0;
       display: flex;
       flex-direction: column;
       text-align: center;
       gap: 30px;
       padding: 20px 30px;
 
-      .img-results {
-        & img {
-          width: 100%;
-        }
+      .news-illustration img {
+        width: 100%;
+        border-radius: $radius-md;
+      }
+      .news-illustration-card img {
+        width: 40%;
+        border-radius: $radius-md;
       }
 
-      .img-spotlight {
-        & img {
-          width: 50%;
-        }
-      }
-
-      .content-article {
+      .news-title {
         font-size: 24px;
-        text-align: center;
       }
 
-      .description-article {
+      .news-desc {
         opacity: 0.8;
       }
+    }
 
+    @media (max-width: 700px) {
+      flex-direction: column;
+      gap: 20px;
 
+      .news-card {
+        width: 100%;
+        margin: 12px 0;
+        padding: 16px;
+      }
+    }
+  }
+
+  @media (max-width: 700px) {
+    margin: 0 4%;
+    .section-title {
+      font-size: 32px;
     }
   }
 }
 
-.regional-results {
+.results {
   max-width: 62%;
   margin: 80px 20%;
   display: flex;
   flex-direction: column;
   gap: 70px;
 
-  .h2 {
+  .section-title {
     font-size: 60px;
     font-weight: 400;
   }
 
-  .description {
+  .results-intro {
     font-size: 16px;
-    color: #444;
+    color: $color-muted;
     opacity: 0.8;
   }
 
-  .align {
-    display: flex;
+  .results-grid {
+    @include flex-center(row, 160px);
     justify-content: center;
-    gap: 160px;
 
-    .container {
+    .results-block {
       display: flex;
       flex-direction: column;
       gap: 20px;
 
-      .title-speech {
+      .results-title {
         font-size: 16px;
         color: #555;
       }
 
-      .list {
+      .results-list {
         list-style: none;
         padding: 0;
         display: flex;
         flex-direction: column;
         gap: 60px;
 
-        .liste {
+        li {
           font-size: 26px;
-          color: #111;
+          color: $color-text;
           padding-left: 16px;
-          border-left: 2px solid #e2e2e2;
+          border-left: 2px solid $color-border;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 700px) {
+    max-width: 94%;
+    margin: 40px 3%;
+    gap: 32px;
+
+    .section-title {
+      font-size: 32px;
+    }
+    .results-grid {
+      @include flex-center(column, 24px);
+      .results-block {
+        width: 100%;
+        .results-list {
+          gap: 24px;
         }
       }
     }
@@ -302,27 +440,22 @@ body {
 
 .footer {
   width: 100%;
-  color: #fff;
-  overflow: hidden;
+  color: $color-white;
 
-  .footer-hero {
-    img {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-      display: block;
-    }
+  .footer-banner img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
   }
 
-  .footer-bottom {
-    background: #555;
-    padding: 32px 6% 48px 0; 
-    position: relative;
+  .footer-content {
+    background: $color-primary;
+    padding: 32px 6% 48px 0;
     display: flex;
     flex-direction: column;
     gap: 60px;
 
-    .socials {
+    .social-links {
       display: flex;
       gap: 20px;
       font-size: 18px;
@@ -330,36 +463,57 @@ body {
       margin-left: 18px;
 
       i {
-        color: #fff;
+        color: $color-white;
         cursor: pointer;
-        transition: opacity 0.2s;
+        @include transition(opacity);
+
         &:hover {
           opacity: 0.7;
         }
       }
     }
 
-    .content {
+    .footer-info {
       display: flex;
       justify-content: space-evenly;
       align-items: flex-start;
       gap: 40px;
       width: 100%;
-      padding: 0 6% 0 0; 
+      padding: 0 6% 0 0;
 
-      .slogan {
+      .footer-slogan {
         font-size: 28px;
-        margin: 0;
-        color: #fff;
+        color: $color-white;
       }
 
-      .contact {
+      .footer-contact {
         text-align: right;
         font-size: 22px;
         line-height: 1.6;
 
-        p {
-          margin: 0;
+        a {
+          color: $color-white;
+          text-decoration: none;
+        }
+      }
+    }
+
+    @media (max-width: 700px) {
+      .social-links {
+        justify-content: center;
+        margin-left: 0;
+      }
+
+      .footer-info {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 0 6%;
+        gap: 20px;
+
+        .footer-contact {
+          text-align: center;
+          font-size: 18px;
         }
       }
     }

@@ -1,5 +1,5 @@
 import './style.scss'
-import './mixin.scss'
+import './mixins.scss'
 import './variables.scss'
 import 'destyle.css'
 
