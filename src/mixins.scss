@@ -12,3 +12,11 @@
 @mixin transition($property: all) {
   transition: $property $transition-fast ease-in-out;
 }
+
+@mixin pad($pad) {
+  padding: $pad;
+}
+
+@mixin mar($mar) {
+  margin: $mar;
+}
